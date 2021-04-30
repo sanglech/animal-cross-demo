@@ -11,7 +11,7 @@ public class ArtSculpture {
     @Column(name="artId")
     private int id;
 
-    @Column(name="artId")
+    @Column(name="NAME")
     private String name;
 
     @Column(name="HAVE")
