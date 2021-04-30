@@ -3,12 +3,12 @@ package com.christian.AnimalCrossingArt.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="art_and_statues")
+@Table(name="art_and_sculpture")
 public class ArtSculpture {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="artId")
+    @Column(name="id")
     private int id;
 
     @Column(name="NAME")

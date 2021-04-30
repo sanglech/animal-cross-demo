@@ -1,16 +1,18 @@
-package com.christian.AnimalCrossingArt.rest;
+package com.christian.AnimalCrossingArt.controller;
 
 
 import com.christian.AnimalCrossingArt.entity.ArtSculpture;
 import com.christian.AnimalCrossingArt.service.ArtSculptureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+
+@Controller
 @RequestMapping("/art")
 public class ArtSculptureController {
 
@@ -23,8 +25,12 @@ public class ArtSculptureController {
 
     //expose /list endpoint to return all the art
     @GetMapping("/list")
-    public List<ArtSculpture> findAll(){
-        return null;
+    public String findAll(Model theModel){
+        List<ArtSculpture> arts=artSculptureService.findAll();
+
+        theModel.addAttribute("theArt",arts);
+
+        return "/list-art";
     }
     @GetMapping("/hello")
     public String hello(){
