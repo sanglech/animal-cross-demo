@@ -11,7 +11,7 @@
 	<groupId>com.christian</groupId>
 	<artifactId>AnimalCrossingArt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>AnimalCrossingArt</name>
 	<description>AnimalCrossing Art Search for me</description>
 	<properties>
