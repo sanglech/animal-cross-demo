@@ -15,7 +15,7 @@
     <h3>Art and Sculptures Directory</h3>
     <hr>
     <!-- Add Search box and button here -->
-    <form action="#" th:action="@{/art/search}" th:object="${arts}" method="post">
+    <form action="#" th:action="@{/search}" th:object="${arts}" method="post">
         <input type="text" th:field="*{name}" placeholder="Enter a Name here"/>
         <label>Do I Have</label>
         <select th:field="*{ifHave}">
