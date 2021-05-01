@@ -32,3 +32,4 @@ src/test/*
 target/*
 /target/
 *.DS_Store
+*.properties
