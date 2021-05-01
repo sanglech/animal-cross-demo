@@ -2,12 +2,14 @@ package com.christian.AnimalCrossingArt.controller;
 
 
 import com.christian.AnimalCrossingArt.entity.ArtSculpture;
+import com.christian.AnimalCrossingArt.entity.SearchObject;
 import com.christian.AnimalCrossingArt.service.ArtSculptureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,12 +25,20 @@ public class ArtSculptureController {
         artSculptureService=theArtSculptureService;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+
+
+
     //expose /list endpoint to return all the art
     @GetMapping("/list")
-    public String findAll(Model theModel){
+    public String findAll(Model theModel,Model searchModel){
         List<ArtSculpture> arts=artSculptureService.findAll();
 
         theModel.addAttribute("theArt",arts);
+        searchModel.addAttribute("arts", new SearchObject());
 
         return "/list-art";
     }
@@ -37,4 +47,15 @@ public class ArtSculptureController {
         return "hello";
     }
 
+    @PostMapping("/search")
+    public String searchArts(@ModelAttribute("arts") SearchObject obj, Model theModel, Model searchModel){
+
+        if(obj.getName()==null){
+            System.out.println("Get all arts");
+        }
+
+        //System.out.println(">>>>>>>" + obj.getName());
+        System.out.println(">>>>>>>" + obj.getIfHave());
+        return "redirect:/list-art";
+    }
 }

@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>List of my Art</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>List of My Art</title>
 </head>
 <body>
-<h1>HI</h1>
-</body>
+<div class="container">
+    <h3>Art and Sculptures Directory</h3>
+    <hr>
+    <!-- Add Search box and button here -->
+    <h1>Form</h1>
+    <form action="#" th:action="@{/art/search}" th:object="${arts}" method="post">
+        <input type="text" th:field="*{name}" placeholder="Enter a Name here"/>
+        <label>Do I Have</label>
+        <select th:field="*{ifHave}">
+            <option th:value="'ALL'" th:text="All"></option>
+            <option th:value="'Y'" th:text="Yes"></option>
+            <option th:value="'N'" th:text="No"></option>
+        </select>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+
+    <!-- Add Radio  -->
+    <table class=" table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Have</th>
+            <th>Description</th>
+            <th>Real</th>
+            <th>Fake</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempArt: ${theArt}">
+            <td th:text="${tempArt.name}"/>
+            <td th:text="${tempArt.have}"/>
+            <td th:text="${tempArt.desc}"/>
+            <td>Empty</td>
+            <td>Empty</td>
+         </tbody>
+        </table>
+
+        </div>
+    </body>
 </html>
