@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/art")
+@RequestMapping("/")
 public class ArtSculptureController {
 
     private ArtSculptureService artSculptureService;
@@ -41,7 +41,7 @@ public class ArtSculptureController {
         theModel.addAttribute("theArt",arts);
         searchModel.addAttribute("arts", new SearchObject());
 
-        return "/list-art";
+        return "list-art";
     }
     @GetMapping("/hello")
     public String hello(){
@@ -66,6 +66,6 @@ public class ArtSculptureController {
         theModel.addAttribute("theArt",arts);
         //System.out.println(">>>>>>>" + obj.getName());
         //System.out.println(">>>>>>>" + obj.getIfHave());
-        return "/list-art";
+        return "list-art";
     }
 }
