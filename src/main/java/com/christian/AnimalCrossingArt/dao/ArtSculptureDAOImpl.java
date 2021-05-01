@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class ArtSculptureDAOImpl implements ArtSculptureDAO{
@@ -48,23 +49,50 @@ public class ArtSculptureDAOImpl implements ArtSculptureDAO{
     }
 
     @Override
-    public List<ArtSculpture> getSculptureByName(String name) {
-        return null;
+    public List<ArtSculpture> getSculptureByName(String name,String ifHave) {
+        List<ArtSculpture> arts=null;
+        Session currentSession=entityManager.unwrap(Session.class);
+        String queryStr;
+
+        if(name!=null){
+            name=name.substring(0,1).toUpperCase()+ name.substring(1,name.length()-1);
+            if(ifHave.equals("ALL")){
+                queryStr="FROM ArtSculpture as Art where Art.name like :name_art";
+                Query q=currentSession.createQuery(queryStr,ArtSculpture.class).
+                        setParameter("name_art", "%"+name+"%");
+                arts=q.getResultList();
+            }
+            else{
+                queryStr="FROM ArtSculpture as Art where Art.name like :name_art AND Art.have= :have";
+                Query q=currentSession.createQuery(queryStr,ArtSculpture.class).
+                        setParameter("name_art", "%"+name+"%")
+                        .setParameter("have",ifHave);
+                arts=q.getResultList();
+            }
+        }
+
+        else{
+            queryStr="FROM ArtSculpture as Art where Art.have= :have";
+            Query q=currentSession.createQuery(queryStr,ArtSculpture.class)
+                    .setParameter("have",ifHave);
+            arts=q.getResultList();
+        }
+
+        //Query<ArtSculpture> theQuery= currentSession.createQuery(query,ArtSculpture.class);
+
+        System.out.println(">>>>>>IN DAO: "+ arts);
+        return arts;
     }
 
-    @Override
-    public List<ArtSculpture> getSculptureByHave(String have) {
-        return null;
-    }
 
     @Override
     public void saveArt(ArtSculpture artSculpture) {
-
+        //Stubbed code wont have update func
     }
 
     @Override
     public void deleteArtById(int theId) {
-
+        //Stubbed func wont have delete func
     }
 
 }

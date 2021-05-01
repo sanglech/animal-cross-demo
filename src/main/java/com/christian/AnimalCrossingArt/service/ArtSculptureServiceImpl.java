@@ -39,15 +39,10 @@ public class ArtSculptureServiceImpl implements ArtSculptureService{
 
     @Override
     @Transactional
-    public List<ArtSculpture> getSculptureByName(String name) {
-        return artSculpt.getSculptureByName(name);
+    public List<ArtSculpture> getSculptureByName(String name,String have) {
+        return artSculpt.getSculptureByName(name,have);
     }
 
-    @Override
-    @Transactional
-    public List<ArtSculpture> getSculptureByHave(String have) {
-        return artSculpt.getSculptureByHave(have);
-    }
 
     @Override
     @Transactional

@@ -25,6 +25,7 @@ public class ArtSculptureController {
         artSculptureService=theArtSculptureService;
     }
 
+    //Need so returning string is null instead of empty
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
@@ -47,15 +48,24 @@ public class ArtSculptureController {
         return "hello";
     }
 
-    @PostMapping("/search")
+    @RequestMapping("/search")
     public String searchArts(@ModelAttribute("arts") SearchObject obj, Model theModel, Model searchModel){
-
-        if(obj.getName()==null){
+        List<ArtSculpture> arts=null;
+        if(obj.getName()==null && obj.getIfHave().equals("ALL")){
             System.out.println("Get all arts");
+            arts=artSculptureService.findAll();
         }
 
+        // add query for if i have
+        // add query for name
+        else{
+            System.out.println(">>>>>> Get: name: "+obj.getName());
+            arts=artSculptureService.getSculptureByName(obj.getName(),obj.getIfHave());
+        }
+
+        theModel.addAttribute("theArt",arts);
         //System.out.println(">>>>>>>" + obj.getName());
-        System.out.println(">>>>>>>" + obj.getIfHave());
-        return "redirect:/list-art";
+        //System.out.println(">>>>>>>" + obj.getIfHave());
+        return "/list-art";
     }
 }

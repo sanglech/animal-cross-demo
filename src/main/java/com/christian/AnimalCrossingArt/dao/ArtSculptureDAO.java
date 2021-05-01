@@ -7,8 +7,7 @@ import java.util.List;
 public interface ArtSculptureDAO {
     public List<ArtSculpture> findAll();
     public ArtSculpture getSculptureById(int id);
-    public List<ArtSculpture> getSculptureByName(String name);
-    public List<ArtSculpture> getSculptureByHave(String have);
+    public List<ArtSculpture> getSculptureByName(String name,String ifHave);
     public void saveArt(ArtSculpture artSculpture);
     public void deleteArtById(int theId);
 }
